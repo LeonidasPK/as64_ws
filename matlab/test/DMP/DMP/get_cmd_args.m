@@ -15,7 +15,7 @@ cmd_args.std_K = 0.92;
 
 cmd_args.DMP_TYPE = 'DMP'; % 'DMP', 'DMP-bio', 'DMP-plus'
 
-cmd_args.train_method = 'RLWR'; % 'LWR', 'LS', 'RLS' , 'RLWR'
+cmd_args.train_method = 'RFWR'; % 'LWR', 'LS', 'RLS' , 'RFWR'
 
 cmd_args.CAN_SYS_TYPE = 'exp'; % 'lin', exp', 'spring-damper'
 

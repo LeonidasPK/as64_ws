@@ -43,9 +43,9 @@ function [train_error, F, Fd] = DMP_train(dmp, Time, yd_data, dyd_data, ddyd_dat
   
       LWR_train(dmp,x, s, Fd);
       
-    elseif (strcmpi(train_method,'RLWR'))
+    elseif (strcmpi(train_method,'RFWR'))
         
-        RLWR_train(dmp,x, s, Fd);
+      RFWR_train(dmp,x, s, Fd);
 
     elseif (strcmpi(train_method,'LS'))
 
