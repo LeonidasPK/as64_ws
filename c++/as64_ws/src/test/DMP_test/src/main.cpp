@@ -10,6 +10,7 @@
 #include <utils.h>
 
 #include <DMP_lib/DMP/DMP.h>
+#include <DMP_lib/DMP/DMPBio.h>
 
 #include <DMP_lib/CanonicalSystem/ExpCanonicalSystem.h>
 #include <DMP_lib/CanonicalSystem/LinCanonicalSystem.h>
@@ -96,7 +97,7 @@ int main(int argc, char** argv)
 
   can_sys_ptr->init(cmd_args.x_end, tau);
   
-  std::vector<as64::DMP> dmp(D);
+  std::vector<as64::DMPBio> dmp(D);
   for (int i=0; i<D; i++){
       dmp[i].init(cmd_args.N_kernels, cmd_args.a_z, cmd_args.b_z, can_sys_ptr, cmd_args.std_K, cmd_args.USE_GOAL_FILT, cmd_args.a_g);
   }

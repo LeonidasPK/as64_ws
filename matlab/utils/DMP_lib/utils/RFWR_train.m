@@ -10,7 +10,7 @@ function RFWR_train(dmp, x, s, Fd)
   
   n = length(Fd);
   
-  lambda = 0.99;
+  lambda = 1;
   P = ones(dmp.N_kernels, 1);
   dmp.w = zeros(dmp.N_kernels, 1);
   

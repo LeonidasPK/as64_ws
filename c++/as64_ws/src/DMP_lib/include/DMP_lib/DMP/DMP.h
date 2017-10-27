@@ -98,6 +98,8 @@ public:
   arma::vec h; // N_kernelsx1 vector with the kernel stds of the DMP
 
 private:
+  // calculates the desired force for the demonstraded path
+  void calculate_Fd(const arma::rowvec &yd_data, const arma::rowvec &dyd_data, const arma::rowvec &ddyd_data, arma::mat &u, arma::rowvec &g, arma::rowvec &y0, arma::rowvec &Fd);
 
   int N_kernels; // number of kernels (basis functions)
 

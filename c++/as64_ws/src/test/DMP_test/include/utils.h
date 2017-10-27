@@ -8,7 +8,7 @@
 #include <fstream>
 #include <boost/concept_check.hpp>
 #include <armadillo>
-#include <../../home/slifer/slifer/RAMCIP/ramcip_handover/src/BHand_lib/include/barrett_properties.h>
+//#include <../../home/slifer/slifer/RAMCIP/ramcip_handover/src/BHand_lib/include/barrett_properties.h>
 
 #include <ros/ros.h>
 

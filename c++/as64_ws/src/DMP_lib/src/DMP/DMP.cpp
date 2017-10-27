@@ -100,14 +100,19 @@ double DMP::train(const arma::rowvec &yd_data, const arma::rowvec &dyd_data, con
     arma::vec s = u.t()*(g0-y0);
     arma::rowvec g = g0 * arma::rowvec().ones(t.n_elem);
     
+    arma::rowvec y0_vec = y0 * arma::rowvec().ones(t.n_elem);
+    
     if (this->USE_GOAL_FILT){
       arma::rowvec exp_t = arma::exp(-this->a_g*t/tau);
       g = y0*exp_t + g0*(1-exp_t);
     }
     
-    arma::rowvec ddzd_data = ddyd_data*std::pow(v_scale,2);
-    arma::rowvec g_attr_data = -this->a_z*(this->b_z*(g-yd_data)-dyd_data*v_scale);
-    arma::rowvec Fd = (ddzd_data + g_attr_data);
+    arma::rowvec Fd(t.n_elem);
+    //arma::rowvec ddzd_data = ddyd_data*std::pow(v_scale,2);
+    //arma::rowvec g_attr_data = -this->a_z*(this->b_z*(g-yd_data)-dyd_data*v_scale);
+    //arma::rowvec Fd = (ddzd_data + g_attr_data);
+    
+    this->calculate_Fd(yd_data, dyd_data, ddyd_data, u, g, y0_vec, Fd);
 
     if (train_method.compare("LWR") == 0){
         
@@ -175,14 +180,19 @@ double DMP::train(const arma::rowvec &yd_data, const arma::rowvec &dyd_data, con
     arma::vec s = u.t()*(g0-y0);
     arma::rowvec g = g0 * arma::rowvec().ones(t.n_elem);
     
+    arma::rowvec y0_vec = y0 * arma::rowvec().ones(t.n_elem);
+    
     if (this->USE_GOAL_FILT){
       arma::rowvec exp_t = arma::exp(-this->a_g*t/tau);
       g = y0*exp_t + g0*(1-exp_t);
     }
     
-    arma::rowvec ddzd_data = ddyd_data*std::pow(v_scale,2);
-    arma::rowvec g_attr_data = -this->a_z*(this->b_z*(g-yd_data)-dyd_data*v_scale);
-    arma::rowvec Fd = (ddzd_data + g_attr_data);
+    arma::rowvec Fd(t.n_elem);
+    //arma::rowvec ddzd_data = ddyd_data*std::pow(v_scale,2);
+    //arma::rowvec g_attr_data = -this->a_z*(this->b_z*(g-yd_data)-dyd_data*v_scale);
+    //Fd = (ddzd_data + g_attr_data);
+    
+    this->calculate_Fd(yd_data, dyd_data, ddyd_data, u, g, y0_vec, Fd);
 
     if (train_method.compare("LWR") == 0){
         
@@ -313,4 +323,12 @@ double DMP::get_v_scale()
   return get_tau() * a_s;
 }
 
+void DMP::calculate_Fd(const arma::rowvec &yd_data, const arma::rowvec &dyd_data, const arma::rowvec &ddyd_data, arma::mat &u, arma::rowvec &g, arma::rowvec &y0, arma::rowvec &Fd)
+{
+  double v_scale = this->get_v_scale();
+  
+  arma::rowvec ddzd_data = ddyd_data * std::pow(v_scale,2);
+  arma::rowvec g_attr_data = -this->a_z * (this->b_z * (g - yd_data) - dyd_data * v_scale);
+  Fd = (ddzd_data + g_attr_data);
+}
 }  // namespace as64
