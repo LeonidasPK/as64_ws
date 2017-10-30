@@ -192,7 +192,7 @@ classdef DMP_bio < handle
       %  @param[in] g0: final goal.
       %  @param[out] shape_attr: The shape_attr of the DMP.
       function shape_attr = shape_attractor(dmp, x, u, y0, g0)
-          
+          u
           f = dmp.forcing_term(x);
           f_scale = dmp.forcing_term_scaling(u, y0, g0);  
           K = dmp.a_z * dmp.b_z;

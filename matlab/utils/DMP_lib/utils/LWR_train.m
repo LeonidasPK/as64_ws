@@ -6,8 +6,8 @@
 %  @param[in] Fd: Row vector with the desired values of the shape attractor.
 function LWR_train(dmp, x, s, Fd)
 
-  s = s(:);   
-      
+  s = s(:);  
+  
   for k=1:dmp.N_kernels
 	  Psi = exp(-dmp.h(k)*(x-dmp.c(k)).^2);
 	  temp = s'.*Psi;
